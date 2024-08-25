@@ -24,7 +24,15 @@ const App = () => {
 
       setError(null);
 
-      const response = await axios.post('https://flask-mocha.vercel.app/bfhl', parsedJson);
+      try {
+  const response = await axios.post('https://flask-mocha.vercel.app/bfhl', parsedJson);
+  setResponseData(response.data);
+} catch (err) {
+  console.error('Error details:', err);  // Log the error for debugging
+  setError(err.message);
+  setResponseData(null);
+}
+
 
       setResponseData(response.data);
     } catch (err) {
